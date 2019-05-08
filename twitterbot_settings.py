@@ -11,6 +11,11 @@ class Settings:
 	PostedRetweetsOutputFile = "posted-retweets.log"   # Log file to save all retweeted tweets (one tweetid per line).
 	RetweetIncludeWords = ["#hashtag"]		   # Include tweets with these words when retweeting.
 	RetweetExcludeWords = []			   # Do not include tweets with these words when retweeting.
+        # Associate author names with Twitter handles so you can tag them
+        # Currently, we use <dc:creator> names rather than <author> emails
+        AuthorMap = {
+                "Author Name": "@post_author",
+        }
 
 class TwitterAuth:
 	"""

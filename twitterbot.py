@@ -14,7 +14,13 @@ from twitterbot_settings import Settings, TwitterAuth
 def compose_message(rss_item):
 	"""Compose a tweet from title, link, and description, and then return the final tweet message."""
 	title, link, description = rss_item["title"], rss_item["link"], rss_item["description"]
-	message = shorten_text(title, maxlength=250) + " " + link
+        # TODO: This only supports the author format used by pelican
+        author_name = rss_item["author_detail"]["name"]
+        short_title = shorten_text(title, maxlength=250)
+        if author_name in Settings.AuthorMap:
+                author_name = Settings.AuthorMap[author_name]
+	message = shorten_text(title, maxlength=250) + " by " + author_name + " " + link
+        
 	return message
 
 def shorten_text(text, maxlength):
